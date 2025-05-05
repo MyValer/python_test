@@ -1,49 +1,8 @@
 import requests
-import logging
-import os
 
 
 class ScooterAPI:
-    BASE_URL = "https://0834152a-9c57-4c5a-bc9d-43fa46bc7e34.serverhub.praktikum-services.ru"
-
-    def __init__(self):
-        # Настройка логирования
-        self._setup_logging()
-
-    def _setup_logging(self):
-        """Настройка системы логирования"""
-        log_dir = "/var/www/backend/logs"
-        try:
-            if not os.path.exists(log_dir):
-                os.makedirs(log_dir, exist_ok=True)
-
-            logging.basicConfig(
-                filename=os.path.join(log_dir, "error.log"),
-                level=logging.ERROR,
-                format='%(asctime)s - %(levelname)s - %(message)s'
-            )
-        except Exception as e:
-            logging.error(f"Ошибка настройки логирования: {str(e)}")
+    BASE_URL = "https://0834152a-9c57-4c5a-bc9d-43fa46bc7e34.serverhub.praktikum-services.ru/api/v1"
 
     def create_order(self, order_data):
-        """Создание заказа самоката"""
-        url = f"{self.BASE_URL}/api/v1/orders"
-        try:
-            response = requests.post(url, json=order_data)
-            response.raise_for_status()
-            return response
-        except Exception as e:
-            logging.error(f"Ошибка создания заказа: {str(e)}")
-            raise
-
-    def get_order_by_track(self, track_number):
-        """Получение заказа по трек-номеру"""
-        url = f"{self.BASE_URL}/api/v1/orders/track"
-        try:
-            params = {"t": track_number}
-            response = requests.get(url, params=params)
-            response.raise_for_status()
-            return response
-        except Exception as e:
-            logging.error(f"Ошибка получения заказа по треку {track_number}: {str(e)}")
-            raise
+        return requests.post(f"{self.BASE_URL}/orders", json=order_data)
