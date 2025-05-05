@@ -1,42 +1,40 @@
 import pytest
-import logging
-from helpers.api import OrderAPI
+from helpers.api import ScooterAPI
 
 
 @pytest.fixture
-def order_api():
-    return OrderAPI()
+def api_client():
+    return ScooterAPI()
 
 
-def test_create_and_get_order(order_api):
-    """Тест создания заказа и проверки его данных по трек-номеру"""
-    try:
-        # Шаг 1: Создание заказа
-        order_data = {
-            "firstName": "Иван",
-            "lastName": "Иванов",
-            "address": "Москва, ул. Ленина, 1",
-            "metroStation": 4,
-            "phone": "+79991112233",
-            "rentTime": 3,
-            "deliveryDate": "2024-06-30",
-            "comment": "Тестовый заказ",
-            "color": ["BLACK"]
-        }
+def test_order_creation_and_retrieval(api_client):
+    """Тест создания заказа и получения его по трек-номеру"""
+    # 1. Подготовка тестовых данных
+    test_order = {
+        "firstName": "Валерий",
+        "lastName": "Петров",
+        "address": "Москва, ул. Тестовая, 123",
+        "metroStation": 204,
+        "phone": "+79991112233",
+        "rentTime": 2,
+        "deliveryDate": "2024-06-30",
+        "comment": "Тестовый заказ",
+        "color": ["BLACK"]
+    }
 
-        create_response = order_api.create_order(order_data)
-        assert create_response.status_code == 201, "Не удалось создать заказ"
+    # 2. Создание заказа
+    create_response = api_client.create_order(test_order)
+    assert create_response.status_code == 201, "Ошибка создания заказа"
 
-        # Шаг 2: Сохранение номера трека
-        track_number = create_response.json().get("track")
-        assert track_number is not None, "Трек-номер не получен в ответе"
+    # 3. Получение трек-номера
+    track_number = create_response.json().get("track")
+    assert track_number is not None, "Трек-номер не получен"
 
-        # Шаг 3: Получение заказа по треку
-        get_response = order_api.get_order_by_track(track_number)
+    # 4. Получение заказа по треку
+    get_response = api_client.get_order_by_track(track_number)
+    assert get_response.status_code == 200, "Ошибка получения заказа"
 
-        # Шаг 4: Проверка кода ответа
-        assert get_response.status_code == 200, "Не удалось получить заказ по трек-номеру"
-
-    except Exception as e:
-        logging.error(f"Ошибка в тесте: {str(e)}")
-        raise
+    # 5. Проверка данных заказа
+    order_data = get_response.json()
+    assert order_data.get("order") is not None, "Данные заказа не получены"
+    assert order_data["order"]["track"] == track_number, "Несоответствие трек-номеров"
