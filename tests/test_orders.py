@@ -1,5 +1,5 @@
 from helpers.api import ScooterAPI
-
+#  Макаров Валерий, 29-я когорта — Финальный проект. Инженер по тестированию плюс
 def test_order_creation():
     api = ScooterAPI()
     order_data = {

@@ -1,5 +1,5 @@
 import requests
-
+#  Макаров Валерий, 29-я когорта — Финальный проект. Инженер по тестированию плюс
 
 class ScooterAPI:
     BASE_URL = "https://0834152a-9c57-4c5a-bc9d-43fa46bc7e34.serverhub.praktikum-services.ru/api/v1"
