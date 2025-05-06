@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+/venv
+error.log
+/var/www/backend/logs/
