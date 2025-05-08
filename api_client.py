@@ -1,4 +1,4 @@
-import requests
+import requests x
 from config import BASE_URL, CREATE_ORDER_PATH, GET_ORDER_PATH
 
 class ScooterApi:
