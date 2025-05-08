@@ -37,8 +37,7 @@ delivery_api_tests/
 - Python 3.8+
 - Pytest - фреймворк для тестирования
 - Requests - отправка HTTP-запросов
-- Allure - генерация красивых отчетов (опционально)
-- Logging - логирование выполнения тестов
+
 
 ## ⚙️ Установка
 
@@ -50,6 +49,7 @@ cd delivery_api_tests
 
 bash
 pip install -r requirements.txt
+
 🚀 Запуск тестов
 Базовый тест:
 
@@ -61,9 +61,6 @@ bash
 pytest tests/test_orders.py -v -s
 С генерацией отчета Allure:
 
-bash
-pytest --alluredir=allure-results
-allure serve allure-results
 🧪 Тестовые сценарии
 test_create_order - создание нового заказа
 
