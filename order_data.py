@@ -1,12 +1,11 @@
-# Тестовые данные для заказа
-sample_order = {
-    "clientName": "Uzumaki",
-    "clientSurname": "Boruto",
-    "deliveryPoint": "Hidden Leaf, Hokage office",
-    "metroNumber": 1,
-    "clientMobile": "+7 950 111 22 33",
-    "daysRent": 2,
-    "deliveryTime": "2024-04-10",
-    "deliveryComment": "For Hokage mission",
-    "scooterColors": ["BLUE", "YELLOW"]
+DEFAULT_ORDER = {
+    "firstName": "Тест",
+    "lastName": "Тестов",
+    "address": "Москва, ул. Тестовая, 1",
+    "metroStation": 4,
+    "phone": "+79991112233",
+    "rentTime": 1,
+    "deliveryDate": "2024-06-01",
+    "comment": "Тестовый заказ",
+    "color": ["BLACK"]
 }
